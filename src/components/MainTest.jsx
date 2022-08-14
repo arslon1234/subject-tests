@@ -101,13 +101,13 @@ const MainTest = ({ id, number, setId, setNumber }) => {
                       <div className="w-full">
                         <div className="w-full">
                           {item.incorrect_answers.map((answer, i) => {
-                            console.log(data, "item")
+                            
                             return (
                               <>
                                 <div
                                   key={index}
                                   onClick={data ? null : () => selectAnswer(i,answer,data)}
-                                  className={(count === i && data === true ? "bg-gray-500 p-2 cursor-pointer text-white" : "p-2 cursor-pointer hover:bg-gray-200")}
+                                  className={(data === true ? "bg-gray-500 p-2 cursor-pointer text-white" : "p-2 cursor-pointer hover:bg-gray-200")}
                                 >
                                   {answer}
                                 </div>
