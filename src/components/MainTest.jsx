@@ -35,17 +35,28 @@ const MainTest = ({ id, number, setId, setNumber }) => {
         setTests(res.data.results);
       });
   };
-  const ClickId = (ID) => {
+  const ClickId = (event,ID) => {
+    let activeEl = document.querySelector(".activeEl")
+    let active = document.querySelector(".active")
+    if(activeEl){
+      activeEl.classList.remove("activeEl")
+    }
+    if(active){
+      active.classList.remove("active")
+    }
+    event.target.classList.add("activeEl")
     setId(ID);
+
   };
-  const selectAnswer =(index,answer,data)=>{
-    setCount(index)
-    setSelect(answer)
-    data = true
-    console.log(data, "func")
-    setSubmit(true)
-    setFind_ans(true)
-    console.log(answer, "answer")
+  const selectAnswer = (event,id,answer)=> {
+      let active = document.querySelector(".active")
+      if(active){
+        active.classList.remove("active")
+      }
+      event.target.classList.add("active")
+      let data = tests.filter(item=>item.id == id)
+      data[0].selected = true
+      data[0].selectedAnswer = answer
   }
   const submitAnswer = (correct_answer, selected) => {
     selected= false
@@ -57,10 +68,14 @@ const MainTest = ({ id, number, setId, setNumber }) => {
       console.log("xato");
     }
   };
+  console.log(tests);
   const getFunction = () => {
     GetTests();
     setActive(true);
   };
+  useEffect(()=>{
+
+  },[tests])
   return (
     <div className="w-full flex items-center justify-center">
       {active ? (
@@ -70,10 +85,10 @@ const MainTest = ({ id, number, setId, setNumber }) => {
               return (
                 <div key={item.id}>
                   <p
-                    onClick={() => ClickId(item.id)}
+                    onClick={(event) => ClickId(event,item.id)}
                     className={
-                      item.id === id
-                        ? "py-2 px-6 border-[1px] bg-blue-500 cursor-pointer hover:bg-slate-100"
+                     item.selected
+                        ? "py-2 px-6 border-[1px] bg-gray-500 cursor-pointer "
                         : "py-2 px-6 border-[1px] cursor-pointer hover:bg-slate-100"
                     }
                   >
@@ -88,8 +103,7 @@ const MainTest = ({ id, number, setId, setNumber }) => {
               tests
                 .filter((item) => item.id === id)
                 .map((item, index) => {
-                  let data = item.selected
-                  console.log(data, "data")
+                  let data = item
                   return (
                     <div className="w-full">
                       <div className="bg-[#F7F7F7] py-3 px-3 text-lg text-black font-semibold">
@@ -101,15 +115,15 @@ const MainTest = ({ id, number, setId, setNumber }) => {
                       <div className="w-full">
                         <div className="w-full">
                           {item.incorrect_answers.map((answer, i) => {
-                            console.log(data, "item")
                             return (
                               <>
                                 <div
                                   key={index}
-                                  onClick={data ? null : () => selectAnswer(i,answer,data)}
-                                  className={(count === i && data === true ? "bg-gray-500 p-2 cursor-pointer text-white" : "p-2 cursor-pointer hover:bg-gray-200")}
+                                  onClick={(event)=> selectAnswer(event,item.id,answer)}
+                                  className={item?.selectedAnswer == answer ? "p-2 cursor-pointer bg-gray-300 hover:bg-gray-200" :"p-2 cursor-pointer hover:bg-gray-200"}
                                 >
                                   {answer}
+                                  {data?.selected}
                                 </div>
                               </>
                             );

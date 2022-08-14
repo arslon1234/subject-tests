@@ -6,3 +6,13 @@
     background-color: green;
     color: white;
   }
+
+  .active {
+    background: rgb(229 231 235);
+  }
+  .activeEl {
+    background: blue;
+  }
+  .activeEl:hover {
+    background: blue !important;
+  }
