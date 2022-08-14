@@ -1,23 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import MainTest from "./components/MainTest";
+import Navbar from "./components/Navbar";
 
 function App() {
+  const [number, setNumber] = useState();
+  const [id, setId] = useState(1);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="w-full">
+    <Navbar id={id} number={number}/>
+    <MainTest id={id} setId={setId} number={number} setNumber={setNumber}/>
     </div>
   );
 }
