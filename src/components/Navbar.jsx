@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React from 'react'
 const Navbar = ({active, openModal,setFunc,func,id,number}) => {
   return (
     <div className='w-full h-[70px] bg-[#F8F9FA] flex items-center justify-around'>

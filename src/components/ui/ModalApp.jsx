@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React from 'react'
 import Modal from 'react-modal';
 const customStyles = {
   content: {
@@ -14,10 +14,6 @@ const customStyles = {
   },
 };
 const ModalApp = ({modalIsOpen,afterOpenModal,closeModal,correct,number,setActive}) => {
-  const [percent, setPercent] = useState('')
-  useEffect(()=>{
-    setPercent(Math.floor(((correct.length / number)*100)))
-  },[])
   const GoHome =()=>{
     closeModal()
     localStorage.removeItem('active')
@@ -36,8 +32,7 @@ const ModalApp = ({modalIsOpen,afterOpenModal,closeModal,correct,number,setActiv
     <div className='w-[500px] h-[250px] flex flex-col items-center justify-around'>
     <p className='font-bold text-gray-700 text-3xl'>Your Results</p>
     <p className='font-base text-gray-500 text-2xl mt-2'>{correct.length}/{number}</p>
-    <p className='font-base text-gray-500 text-2xl my-1'>or</p>
-    <p className='font-base text-gray-500 text-2xl mt-2'>{percent}%</p>
+    <p className='font-base text-gray-500 text-2xl my-1'>Correct answers: {correct.length}</p>
     <div className='w-full mt-1 flex items-center justify-between flex-wrap'>
     <button onClick={closeModal} className='w-[49%] h-[35px] border-[1px] rounded-[5px] text-cyan-500 hover:text-white hover:bg-cyan-500 ease-in duration-300'>OK</button>
     <button onClick={GoHome} className='w-[49%] h-[35px] border-[1px] rounded-[5px] text-red-400 hover:text-white hover:bg-red-400 ease-in duration-300'>GO HOME</button>

@@ -162,7 +162,6 @@ const GetTests = (num,cat) => {
             START
           </button>
           <button
-            // onClick={getFunction}
             className="bg-blue-500 w-full h-[40px] mt-3 rounded-[8px] text-white"
           >
             TESTS
